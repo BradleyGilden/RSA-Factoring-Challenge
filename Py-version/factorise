@@ -1,0 +1,30 @@
+from decimal import Decimal
+from sys import argv
+from math import isqrt
+
+
+def factorise(line):
+    num = Decimal(line)
+    factors = []
+
+    # Factorize the number
+    for q in range(2, isqrt(int(num)) + 1):
+        while num % q == 0:
+            factors.append(q)
+            num //= q
+
+    if num > 1:
+        factors.append(num)
+
+    # Print the factors
+    if len(factors) >= 2:
+        p = factors[0]
+        q = factors[1]
+        print(f"{line.strip()} = {p} * {q}")
+
+
+if __name__ == '__main__':
+    filename = argv[1]
+    with open(filename, "r") as file:
+        for line in file:
+            factorise(line)
