@@ -7,9 +7,11 @@
  * @lineptr: line read
 */
 
-void factorise(char **lineptr)
+void factorise(const char **lineptr)
 {
-    int num = atoi(*lineptr), q = 2, p = 0;
+    char *endptr = NULL;
+    long long int num = strtoll(*lineptr, &endptr, 10), q = 2, p = 0;
+
 
     while (q <= num / 2)
     {
@@ -20,8 +22,8 @@ void factorise(char **lineptr)
         }
         q += 1;
     }
-    printf("%d=%d*%d\n", num, p, q);
-    free(*lineptr);
+    printf("%lld=%lld*%lld\n", num, p, q);
+    free((char *)*lineptr);
     *lineptr = NULL;
 }
 
@@ -48,7 +50,7 @@ int main(int ac, char *av[])
         return (EXIT_FAILURE);
     }
     while(getline(&lineptr, &n, file) >= 0)
-        factorise(&lineptr);
+        factorise((const char **)&lineptr);
     if (lineptr != NULL)
         free(lineptr);
     fclose(file);

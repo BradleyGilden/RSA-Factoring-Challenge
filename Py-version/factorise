@@ -1,3 +1,4 @@
+#!/bin/python3
 from decimal import Decimal
 from sys import argv
 from math import isqrt
