@@ -50,7 +50,15 @@ int main(int ac, char *av[])
         return (EXIT_FAILURE);
     }
     while(getline(&lineptr, &n, file) >= 0)
+    {
+        if (lineptr[0] == '\n')
+        {
+            free(lineptr);
+            lineptr = NULL;
+            continue;
+        }
         factorise((const char **)&lineptr);
+    }
     if (lineptr != NULL)
         free(lineptr);
     fclose(file);
